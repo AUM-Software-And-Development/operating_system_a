@@ -3,6 +3,5 @@
 *.bin
 *.exe
 *.bxrc
-*.flp
 Backup/
 Booting/

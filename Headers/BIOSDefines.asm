@@ -1,0 +1,1 @@
+BootDrive: db 0
