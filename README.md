@@ -9,49 +9,49 @@ Step 2:
 	Install CLang from https://www.msys2.org/
 
 Step 3:
-	Install an emulator like Bochs, QEMU, VirtualBox
+	Install an emulator aka Bochs, QEMU, VirtualBox
 
 Step 4:
 	Run the build.bat file.
 
 Step 5:
-	Run the output binary as a floppy in your desired emulator.
+	Run the output binary as a 1.2 inch floppy in your chosen emulator.
 
 ====================
 Windows & or Ubuntu:
 ====================
-Windows-Docker build:
+Windows / Docker with Ubuntu build:
 
 Step 1:
 	Install Docker using https://docker.com
-	Install an emulator like Bochs, QEMU, VirtualBox
+	Install an emulator aka Bochs, QEMU, VirtualBox
 
 Step 2:
-	Write your own, or copy the "dockerfile" file within this folder
+	Write a dockerfile, or copy the "dockerfile" file within this folder
 
 Step 3:
-	Send the powershell this command->: "docker build ./ -t 'CHOSEACONTAINERNAMEANDPUTITHERE'"
+	Send the Windows powershell this command->: "docker build ./ -t 'PUTYOUROWNCONTAINERNAMEHERE'"
 
-	*The -t flag will instruct Docker to name the build whichever string you give it,
-	and it does not require the quotation marks.
+	*The -t flag will instruct Docker to name the build whichever string you give it.
+	The container name does not require the quotation marks.
 
 Step 4:
-	Send the powershell this command->: 'docker run -it -v "${pwd}:/root/env" --rm 'YOURCONTAINERNAMEGOESHERE''
+	Send the Windows powershell this command->: 'docker run -it -v "${pwd}:/root/env" --rm 'PUTYOUROWNCONTAINERNAMEHERE''
 
-	*The -it flag will instruct Docker to allocate a TTY connected to the containers IO.
-	This allows a shell for scripting access to the container root.
+	*The enclosed quotation marks are required on this one. Your password will be supplanted into the brackets on its own.
 
-	*The -v flag mounts a volume that allows filesharing between Windows and the Unix folders.
+	*The -it flag will instruct Docker to mimic a "TTY stream" to connect the containers IO.
+	This allows a shell for scripting access at the container root privilege.
 
-	*The --rm flag will instruct Docker to remove/close the container when the shell exits.
+	*The -v flag mounts a volume allowing filesharing between Windows and the container folders.
 
-	*The enclosed quotation marks are required on this one. The only thing needed to change,
-	is the container name. Windows will supplant the password on its own.
+	*The --rm flag will instruct Docker to remove/close the container when the "TTY" communication ends.
 
 ==================================
-Ubuntu (or Docker image/WSL) only:
+Ubuntu or Docker image/WSL only:
 ==================================
-		(This part is done by the Dockerfile automatically if you're on Windows.)
+		If you aren't on Windows, you'll have to install the required compiler tools using the following commands:
+		(These terminal instructions are run by the Dockerfile automatically if you're on Windows and using the Dockerfile I've provided.)
 		sudo apt-get update
 		sudo apt-get upgrade -y
 		sudo apt-get install -y make
@@ -60,18 +60,18 @@ Ubuntu (or Docker image/WSL) only:
 
 Step 5:
 	Send the command "make" in the running Ubuntu container/from the development directory.
+	Please be aware that I do not update the makefile as often as the batchfile, because I prefer to use Windows as a native build environment.
 
 Step 6:
 	Run the output binary as a floppy in your desired emulator.
 	The rest is up to you.
 
 
-Keep in mind that software developers are known to change things without notice. If any of these
-commands fail, it means the method was updated by the company, or a command was entered wrong.
 
+Remember that software developers are pretty notorious for changing things without notice. If any of these
+commands happen to fail, it indicates that the method was updated by the company/source developer, or that a command was entered wrong.
 
+Good luck,
 
-Good luck!
-
-Cheers,
+Cheers!
 Eric

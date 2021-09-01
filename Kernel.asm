@@ -1,5 +1,5 @@
 bits 16
-    jmp KernelStart ; increment ip to pass the include code
+    jmp KernelStart ; increment the ip to pass the include code
 
 %include "Headers\Addresses.asm"
 %include "GlobalDescriptorTable.asm"
@@ -66,10 +66,6 @@ bits 32
 ProtectedMode:
     mov ax, DataSegmentGDT
     mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
     mov ebp, 0x90000
     mov esp, ebp
 
