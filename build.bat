@@ -35,7 +35,6 @@ if defined MIGRATE (
 
 ) else (
 
-	echo.
 	echo No migrations were made.
 
 )
@@ -58,14 +57,22 @@ del *.bin /s
 :Build_Source_Files
 
 echo. && echo ___ Building source files
-echo|set /p="->"
-nasm -f bin "%PATHTO%"\bootloader.asm -o "%PATHTO%"\bootloader.bin
-echo|set /p="Attempted to move the output into the booting directory. Response: "
-move "%PATHTO%"\bootloader.bin %BOOTINGDIRECTORY%
+echo|set /P="Nasm output -> "
+nasm -f bin "%PATHTO%"\Bootloader.asm -o "%PATHTO%"\Bootloader.bin
+nasm -f bin "%PATHTO%"\Kernel.asm -o "%PATHTO%"\Kernel.bin
+echo.
+echo End of nasm output. (If nothing printed after the arrow, there were no errors)
+copy /B Bootloader.bin + Kernel.bin OperatingSystem.bin
+echo Attempting to move the output into the booting directory. 
+echo Response:
+move "%PATHTO%"\*.bin %BOOTINGDIRECTORY%
+
+:Backup_Files
+
+echo. && echo ___ Backup settings
 
 if "%BACKUP%" == "TRUE" (
 
-	echo. && echo ___ Backup settings
 	echo A backup was requested to: %PATHTO%\Backup
 
 	if not exist %BACKUPDIRECTORY% (
@@ -100,7 +107,6 @@ if "%BACKUP%" == "TRUE" (
 
 ) else (
 
-	echo.
 	echo No backup, or no replacement was commanded.
 
 )

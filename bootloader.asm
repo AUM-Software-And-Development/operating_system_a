@@ -1,11 +1,18 @@
 bits 16
-jmp 0x7c0:Boot
+	mov ax, BootAddress
+	mov ds, ax
+	jmp BootAddress:Boot ; Increment the ip past the include code
 
+%include "Headers\Addresses.asm"
 %include "ASM Includes\Int19.asm"
 
+BootFail: db 0xa, 0xd, "For some reason, the bootloader didn't jump.", 255
+
 Boot:
-	mov ax, 0x0e81
-	int 0x10
+	call Sector2Loadbb8
+	jmp KernelAddress:0
+	mov si, BootFail
+	call Int16
 	cli
 	hlt
 
