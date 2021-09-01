@@ -47,9 +47,9 @@ Step 4:
 
 	*The --rm flag will instruct Docker to remove/close the container when the "TTY" communication ends.
 
-==================================
+================================
 Ubuntu or Docker image/WSL only:
-==================================
+================================
 		If you aren't on Windows, you'll have to install the required compiler tools using the following commands:
 		(These terminal instructions are run by the Dockerfile automatically if you're on Windows and using the Dockerfile I've provided.)
 		sudo apt-get update
