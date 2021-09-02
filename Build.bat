@@ -15,12 +15,18 @@ set BOOTINGDIRECTORY="%PATHTO%"\Booting
 
 :Check_Migrations
 
-echo. && echo ___ Checking migration paths, and settings
+echo. && echo ___ Checking the migration paths, and settings
 echo The current directory is: %CD%
-if "%PATHTO%" == "%CD%" echo Operations are already occurring from the defined directory path.
+if "%PATHTO%" == "%CD%" (
+	
+	echo Operations are already occurring from the defined directory path. && goto Next_Migration_Step
+
+) else echo Checking for the designated working directory; %PATHTO% && echo|set /P="Result: "
 if not "%PATHTO%" == "%CD%" cd "%PATHTO%" && echo Operations were not occurring from the defined directory path. Navigated there.
 
-if not exist "%PATHTO%" set "MIGRATE=%PATHTO%" > NUL
+:Next_Migration_Step
+
+if not exist "%PATHTO%" set "MIGRATE=%PATHTO%"
 
 if defined MIGRATE (
 
@@ -31,7 +37,7 @@ if defined MIGRATE (
 	echo You may delete %CD% if you no longer wish to use it.
 	echo All outputs from future builds will be located in the new migration.
 	echo If you prefer a custom folder, simply edit the batch file which builds this operating system.
-	echo ^^^
+	echo ... End of migration.
 
 ) else (
 
@@ -39,7 +45,7 @@ if defined MIGRATE (
 
 )
 
-echo. && echo ___ Building directories
+echo. && echo ___ Building the neccessary directories
 if exist %BOOTINGDIRECTORY% echo A directory named bootable already exists. No need to create another.
 if not exist %BOOTINGDIRECTORY% goto Create_Directories
 goto Clear_Binaries_Then_Build_Source_Files
@@ -47,29 +53,33 @@ goto Clear_Binaries_Then_Build_Source_Files
 :Create_Directories
 
 mkdir %BOOTINGDIRECTORY%
-echo "Booting directory created"
+echo Booting directory created.
 
 :Clear_Binaries_Then_Build_Source_Files
 
-echo. && echo ___ Clearing old binaries
+echo. && echo ___ Clearing the old binaries
 del *.bin /s
 
 :Build_Source_Files
 
-echo. && echo ___ Building source files
+echo. && echo ___ Building the source files
 echo|set /P="Nasm output -> "
 nasm -f bin "%PATHTO%"\Bootloader.asm -o "%PATHTO%"\Bootloader.bin
 nasm -f bin "%PATHTO%"\Kernel.asm -o "%PATHTO%"\Kernel.bin
 echo.
 echo End of nasm output. (If nothing printed after the arrow, there were no errors)
-copy /B Bootloader.bin + Kernel.bin OperatingSystem.bin
+copy /B "%PATHTO%"\Bootloader.bin + "%PATHTO%"\Kernel.bin "%PATHTO%"\OperatingSystem.bin
+
+:Output_Source_Files
+
+echo. && echo ___ Outputting the source files
 echo Attempting to move the output into the booting directory. 
 echo Response:
 move "%PATHTO%"\*.bin %BOOTINGDIRECTORY%
 
 :Backup_Files
 
-echo. && echo ___ Backup settings
+echo. && echo ___ These are the backup settings
 
 if "%BACKUP%" == "TRUE" (
 

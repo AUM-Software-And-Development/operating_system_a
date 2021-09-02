@@ -27,6 +27,7 @@ MakeNewLines:
     mov ah, 0x0e
 
 .spacesLoop:
+
     cmp cx, dx
     je .exit
     mov al, 0xa
