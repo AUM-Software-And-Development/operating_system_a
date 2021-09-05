@@ -64,7 +64,7 @@ Step 5:
 Ubuntu or Docker image/WSL only:
 =========
 
-If you aren't on Windows, you'll have to install the required compiler tools by issuing the following commands:
+If you aren't on Windows, you'll have to install the required compiler tools by issuing the following terminal commands:
 
     (These terminal instructions are run by the Dockerfile automatically if you're on Windows and using the Dockerfile that's been provided.)
 
