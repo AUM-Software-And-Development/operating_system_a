@@ -36,6 +36,7 @@ KernelSetup:
 bits 32
 
 ProtectedMode:
+
     mov ax, DataSegmentGDT
     mov ds, ax
     mov ebp, 0x90000
