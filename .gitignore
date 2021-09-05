@@ -3,5 +3,7 @@
 *.bin
 *.exe
 *.bxrc
+*.json
+.vscode/
 Backup/
 Booting/

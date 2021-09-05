@@ -1,6 +1,6 @@
-=============
+=========
 Windows only:
-=============
+=========
 
 Step 1:
 
@@ -22,9 +22,9 @@ Step 5:
 
     Run the output binary as a 1.2 inch floppy in your emulator.
 
-====================
+=========
 Windows & or Ubuntu:
-====================
+=========
 
 Windows / Docker with Ubuntu build:
 
@@ -60,9 +60,9 @@ Step 5:
 
     *The --rm flag will instruct Docker to remove/close the container when the "TTY" communication has halted.
 
-================================
+=========
 Ubuntu or Docker image/WSL only:
-================================
+=========
 
 If you aren't on Windows, you'll have to install the required compiler tools using the following commands:
 
