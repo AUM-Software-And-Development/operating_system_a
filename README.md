@@ -21,7 +21,7 @@ Step 4:
 
 Step 5:
 
-    If you choose to use the auto-run command "e" in step 4, you must ensure the emulator is properly linked to the batch script.
+    If you choose to use the auto run command "e" in step 4, you must ensure the emulator is properly linked to the batch script.
     Do this by either configuring the Bochs source file to find the working directory (or leave it as is from the migration the batch script does for you).
     Run the output "Booting\OperatingSystem.bin" binary as a 1.2 inch floppy in your emulator.
 
@@ -41,14 +41,14 @@ Step 2:
 
 Step 3:
 
-    Send the Windows powershell this command->: "docker build ./ -t 'YOURCONTAINERNAMEGOESHERE'"
+    Send the Windows powershell this command: "docker build ./ -t 'YOURCONTAINERNAMEGOESHERE'"
 
     *The -t flag will instruct Docker to name the build using the string you input as part of the command.
     The container name doesn't require single quotation marks. They are there to denote where the container name goes.
 
 Step 4:
 
-    Send the Windows powershell this command->: 'docker run -it -v "${pwd}:/root/env" --rm 'YOURCONTAINERNAMEGOESHERE''
+    Send the Windows powershell this command: 'docker run -it -v "${pwd}:/root/env" --rm 'YOURCONTAINERNAMEGOESHERE''
 
     *The enclosed double quotation marks are required for this specific command. Your password will be supplanted into the brackets on its own.
 
