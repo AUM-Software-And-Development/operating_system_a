@@ -26,7 +26,7 @@ MakeNewLines:
     xor cx, cx
     mov ah, 0x0e
 
-.spacesLoop:
+.linesLoop:
 
     cmp cx, dx
     je .exit
@@ -35,7 +35,7 @@ MakeNewLines:
     mov al, 0xd
     int 16
     inc cx
-    jmp .spacesLoop
+    jmp .linesLoop
 
 .exit:
 

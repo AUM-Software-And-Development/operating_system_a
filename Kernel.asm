@@ -1,40 +1,22 @@
 bits 16
-    jmp KernelStart ; increment the ip to pass the include code
+    jmp KernelSetup ; increment the ip to pass the include code
 
 %include "Headers\Addresses.asm"
 %include "GlobalDescriptorTable.asm"
 %include "ASM Includes\Int16.asm"
 
 Arrived: db "Arrived, 16b.", 255
-SixteenBitsExit: db "The kernel exited without leaving 16 bit mode.", 255
-ThirtyTwoBitsFailed: db "The kernel could not load/instantiate a GDT.", 255
 
-KernelStart:
+KernelSetup:
 
     org KernelAddress
     mov ax, cs
     mov ds, ax
-    jmp Kernel
-
-Kernel:
 
     call ClearVideo
     call TurnOnTextMode
     mov si, Arrived
     call Int16
-    jmp .request32Bits
-
-.sixteenBitsExit:
-
-    mov dx, 1
-    call MakeNewLines
-    mov si, SixteenBitsExit
-    call Int16
-    
-    cli
-    hlt
-
-.request32Bits:
 
 .enableA20:
 
@@ -51,16 +33,6 @@ Kernel:
     mov cr0, eax
     jmp CodeSegmentGDT:ProtectedMode
 
-.thirtyTwoBitsFailed:
-
-    mov dx, 1
-    call MakeNewLines
-    mov si, ThirtyTwoBitsFailed
-    call Int16
-    
-    cli
-    hlt
-
 bits 32
 
 ProtectedMode:
@@ -68,6 +40,8 @@ ProtectedMode:
     mov ds, ax
     mov ebp, 0x90000
     mov esp, ebp
+
+.kernel:
 
     mov byte [0x000b8000], 'A'
     mov byte [0x000b8002], 'r'
