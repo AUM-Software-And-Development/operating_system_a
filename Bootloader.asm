@@ -1,5 +1,6 @@
 bits 16
-	jmp BootloaderStart ; Increment the ip to pass the include code
+
+	jmp BootloaderSetup ; Increment the ip to pass the include code
 	
 %include "Headers\Addresses.asm"
 %include "Headers\BIOSDefines.asm"
@@ -7,7 +8,7 @@ bits 16
 
 BootFail: db 0xa, 0xd, "For some reason, the bootloader didn't jump.", 255
 
-BootloaderStart:
+BootloaderSetup:
 
 	mov ax, BootAddress
 	mov ds, ax
