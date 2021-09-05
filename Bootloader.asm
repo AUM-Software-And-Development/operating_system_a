@@ -8,6 +8,7 @@ bits 16
 BootFail: db 0xa, 0xd, "For some reason, the bootloader didn't jump.", 255
 
 BootloaderStart:
+
 	mov ax, BootAddress
 	mov ds, ax
 	mov [BootDrive], dl
@@ -15,6 +16,7 @@ BootloaderStart:
 	jmp BootAddress:Boot
 
 Boot:
+
 	call Sector2Loadbb8
 	jmp 0:KernelAddress
 
