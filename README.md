@@ -12,15 +12,18 @@ Step 2:
 
 Step 3:
 
-    Install an emulator aka Bochs, QEMU, VirtualBox
+    Install an emulator like Bochs, QEMU, or VirtualBox
 
 Step 4:
 
-    Run the build.bat file.
+    Run the Build.bat file.
+    See step 5 regarding the auto run "e" command found in this file.
 
 Step 5:
 
-    Run the output binary as a 1.2 inch floppy in your emulator.
+    If you choose to use the auto-run command "e" in step 4, you must ensure the emulator is properly linked to the batch script.
+    Do this by either configuring the Bochs source file to find the working directory (or leave it as is from the migration the batch script does for you).
+    Run the output "Booting\OperatingSystem.bin" binary as a 1.2 inch floppy in your emulator.
 
 =========
 Windows & or Ubuntu:
@@ -34,20 +37,16 @@ Step 1:
 
 Step 2:
 
-    Install an emulator aka Bochs, QEMU, VirtualBox
+    Install an emulator like Bochs, QEMU, or VirtualBox
 
 Step 3:
-
-    Write a dockerfile, or use the "dockerfile" file within this folder
-
-Step 4:
 
     Send the Windows powershell this command->: "docker build ./ -t 'YOURCONTAINERNAMEGOESHERE'"
 
     *The -t flag will instruct Docker to name the build using the string you input as part of the command.
     The container name doesn't require single quotation marks. They are there to denote where the container name goes.
 
-Step 5:
+Step 4:
 
     Send the Windows powershell this command->: 'docker run -it -v "${pwd}:/root/env" --rm 'YOURCONTAINERNAMEGOESHERE''
 
@@ -59,6 +58,8 @@ Step 5:
     *The -v flag mounts a volume allowing filesharing between Windows and the container folders.
 
     *The --rm flag will instruct Docker to remove/close the container when the "TTY" communication has halted.
+
+    Continue to Step 5 in Ubuntu/Docker images or WSL ...
 
 =========
 Ubuntu or Docker image/WSL only:
@@ -74,15 +75,15 @@ If you aren't on Windows, you'll have to install the required compiler tools by 
     sudo apt-get install -y nasm
     sudo apt-get install -y clang
 
-Step 6:
+Step 5:
 
     Send the command "make" in the operating Ubuntu container/from the development directory.
 
-    I'd like you to know that I don't update the makefile as often as the batchfile, because I prefer to use Windows as a complete build environment.
+    I'd like you to know that I don't update the Makefile as often as I update the Batchfile, because I prefer to use Windows as a complete build environment.
 
-Step 7:
+Step 6:
 
-    Run the output binary as a floppy in your emulator.
+    Run the output "Booting\OperatingSystem.bin" binary as a 1.2 inch floppy in your emulator.
 
     Try to keep in mind that software developers tend to change things without notice. If any of these commands fail, it indicates that a method was updated by the company/source code developer, or that a command was entered in an incompatible format.
 
