@@ -3,7 +3,7 @@ echo -------------------------
 echo    Starting the build!      
 echo -------------------------
 
-set PATHTO=C:\Application Development\Operating System
+set PATHTO=C:\OS_Application Development\Operating System
 set "MIGRATE="
 set "BACKUP=FALSE"
 
