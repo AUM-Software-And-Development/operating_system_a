@@ -50,7 +50,7 @@ Step 4:
 
     Send the Windows powershell this command: 'docker run -it -v "${pwd}:/root/env" --rm 'YOURCONTAINERNAMEGOESHERE''
 
-    *The enclosed double quotation marks are required for this specific command. Your password will be supplanted into the brackets on its own.
+    *The enclosed double quotation marks are required for this specific command. ${pwd} will place your current directory in the path.
 
     *The -it flag will instruct Docker to mimic a "TTY stream" in order for you to connect to the containers IO and issue commands.
     (it allows a shell for scripting access at the container root privilege.)
