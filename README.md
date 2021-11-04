@@ -41,14 +41,14 @@ Step 2:
 
 Step 3:
 
-    Send the Windows powershell this command: "docker build ./ -t 'YOURCONTAINERNAMEGOESHERE'"
+    Send the Windows powershell this command: "docker build ./ -t 'containername'"
 
     *The -t flag will instruct Docker to name the build using the string you input as part of the command.
     The container name doesn't require single quotation marks. They are there to denote where the container name goes.
 
 Step 4:
 
-    Send the Windows powershell this command: 'docker run -it -v "${pwd}:/root/env" --rm 'YOURCONTAINERNAMEGOESHERE''
+    Send the Windows powershell this command: 'docker run -it -v "${pwd}:/root/env" --rm 'containername''
 
     *The enclosed double quotation marks are required for this specific command. ${pwd} will place your current directory in the path.
 
