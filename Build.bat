@@ -3,7 +3,7 @@ echo -------------------------
 echo    Starting the build!      
 echo -------------------------
 
-set PATHTO=C:\OS_Application Development\Operating System
+set PATHTO=C:\os_application_development\operating_system
 set "MIGRATE="
 set "BACKUP=FALSE"
 
@@ -64,11 +64,11 @@ del *.bin /s
 
 echo. && echo ___ Building the source files
 echo|set /P="Nasm output -> "
-nasm -f bin "%PATHTO%"\Bootloader.asm -o "%PATHTO%"\Bootloader.bin
-nasm -f bin "%PATHTO%"\Kernel.asm -o "%PATHTO%"\Kernel.bin
+nasm -f bin "%PATHTO%"\bootloader.asm -o "%PATHTO%"\bootloader.bin
+nasm -f bin "%PATHTO%"\kernel.asm -o "%PATHTO%"\kernel.bin
 echo.
 echo End of nasm output. (If nothing printed after the arrow, there were no errors)
-copy /B "%PATHTO%"\Bootloader.bin + "%PATHTO%"\Kernel.bin "%PATHTO%"\OperatingSystem.bin
+copy /B "%PATHTO%"\bootloader.bin + "%PATHTO%"\kernel.bin "%PATHTO%"\operating_system.bin
 
 :Output_Source_Files
 

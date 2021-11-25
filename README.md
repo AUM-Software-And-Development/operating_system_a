@@ -1,6 +1,6 @@
-=========
-Windows only:
-=========
+====
+Windows (only):
+====
 
 Step 1:
 
@@ -16,18 +16,17 @@ Step 3:
 
 Step 4:
 
-    Run the Build.bat file.
-    See step 5 regarding the auto run "e" command found in this file.
+    Start the Build.bat file.
 
 Step 5:
 
-    If you choose to use the auto run command "e" in step 4, you must ensure the emulator is properly linked to the batch script.
-    Do this by either configuring the Bochs source file to find the working directory (or leave it as is from the migration the batch script does for you).
-    Run the output "Booting\OperatingSystem.bin" binary as a 1.2 inch floppy in your emulator.
+    The batch file is set up to allow the programmer to use a file I included called "bochsrc.bxrc". Pressing e after starting the
+    batch, and then hitting enter will automatically run a Bochs emulator with the file outputs from the build process. Bochs must first
+    be installed on the computer in order for the source file to work.
 
-=========
+====
 Windows & or Ubuntu:
-=========
+====
 
 Windows / Docker with Ubuntu build:
 
@@ -43,50 +42,50 @@ Step 3:
 
     Send the Windows powershell this command: "docker build ./ -t 'containername'"
 
-    *The -t flag will instruct Docker to name the build using the string you input as part of the command.
-    The container name doesn't require single quotation marks. They are there to denote where the container name goes.
+    *The -t flag instructs Docker to name the build using the string that gets input, as part of the command.
+    The container name doesn't require single quotation marks. They are there to show where the container name goes.
 
 Step 4:
 
     Send the Windows powershell this command: 'docker run -it -v "${pwd}:/root/env" --rm 'containername''
 
-    *The enclosed double quotation marks are required for this specific command. ${pwd} will place your current directory in the path.
+    *The enclosed double quotation marks are required for this command. ${pwd} will place your current directory in the Linux/container path.
 
-    *The -it flag will instruct Docker to mimic a "TTY stream" in order for you to connect to the containers IO and issue commands.
-    (it allows a shell for scripting access at the container root privilege.)
+    *The -it flag instructs Docker to mimic a "TTY stream" that connects to the containers IO (In Out) and allows issuing commands.
+    (it allows a shell for scripting access using the container super users.)
 
-    *The -v flag mounts a volume allowing filesharing between Windows and the container folders.
+    *The -v flag mounts a volume allowing filesharing between Windows and container folders.
 
-    *The --rm flag will instruct Docker to remove/close the container when the "TTY" communication has halted.
+    *The --rm flag instructs Docker to remove/close the container when the "TTY" communication has ended.
 
-    Continue to Step 5 in Ubuntu/Docker images or WSL ...
+    Go to Step 5 in Ubuntu/Docker images.
 
-=========
-Ubuntu or Docker image/WSL only:
-=========
+====
+Ubuntu or Docker image/WSL (only):
+====
 
-If you aren't on Windows, you'll have to install the required compiler tools by issuing the following terminal commands:
+If not on Windows, install the required compiler tools by issuing the following terminal instructions:
 
-    (These terminal instructions are run by the Dockerfile automatically if you're on Windows and using the Dockerfile that's been provided.)
+    (These terminal instructions are run by the Dockerfile automatically if you're on Windows and using the Dockerfile provided.)
 
     sudo apt-get update
     sudo apt-get upgrade -y
+    sudo apt-get install -y clang
     sudo apt-get install -y make
     sudo apt-get install -y nasm
-    sudo apt-get install -y clang
 
 Step 5:
 
     Send the command "make" in the operating Ubuntu container/from the development directory.
 
-    I'd like you to know that I don't update the Makefile as often as I update the Batchfile, because I prefer to use Windows as a complete build environment.
+    As of 11/24/2021, I don't update the Linux makefile, since I use Windows now. There's no estimated date which I might updated it.
 
 Step 6:
 
-    Run the output "Booting\OperatingSystem.bin" binary as a 1.2 inch floppy in your emulator.
+    Execute the output in "operating_system\booting\operating_system.bin" binary as a 1.2 inch floppy in your emulator.
 
-    Try to keep in mind that software developers tend to change things without notice. If any of these commands fail, it indicates that a method was updated by the company/source code developer, or that a command was entered in an incompatible format.
+    Software developers tend to remake things without notice. If any of commands fail, it indicates a method has been updated by the company or source code developer, or that a command was entered incorrectly.
 
-Thanks for your focus,
+Thanks for reading,
 
 Eric

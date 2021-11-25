@@ -1,33 +1,35 @@
-bits 16
+Bits 16
 
-	jmp BootloaderSetup ; Increment the ip to pass the include code
+	Jmp bootloader_setup ; Increments the instruction pointer to pass the included code.
+
+string_boot_error: db 0xa, 0xd, "An undisclosed error occurred.", 255
+
+%Include "headers\addresses.asm"
+%Include "headers\hardware_values.asm"
+%Include "asm_interrupts\int_19.asm"
+
+
+
+
+bootloader_setup:
+
+	Mov ax, bootable_address                       ; Places the header in ax.
+	Mov ds, ax                                     ; Moves the header reference to the data segment.
+	Mov [boot_drive], dl                           ; Saves the default drive number.
+Call int_19_attach_sector1_to_bootable_address     ; Extra insurance that the bootloader code will be located at the default boot address.
+	Jmp bootable_address:boot                      ; Jumps to the boot address.
+
+boot:
+
+Call int_19_attach_sector_2_to_kernel_address      ; Aligns the kernel code from the drive to the kernel header.
+	Jmp 0:kernel_address                           ; Jumps to the kernel address.
 	
-%include "Headers\Addresses.asm"
-%include "Headers\BIOSDefines.asm"
-%include "ASM Includes\Int19.asm"
+	.bootFailure:
+	
+		Mov si, string_boot_error
+Call int_16_output_si
+		Cli
+		Hlt
 
-BootFail: db 0xa, 0xd, "For some reason, the bootloader didn't jump.", 255
-
-BootloaderSetup:
-
-	mov ax, BootAddress
-	mov ds, ax
-	mov [BootDrive], dl
-	call Sector1Load0x7c0 ; If for whatever reason this isn't in the boot address...
-	jmp BootAddress:Boot
-
-Boot:
-
-	call Sector2Loadbb8
-	jmp 0:KernelAddress
-
-.bootFailure:
-
-	mov si, BootFail
-	call Int16
-
-	cli
-	hlt
-
-times 510-($-$$) db 0
-dw 0xaa55
+Times 510-($-$$) db 0
+Dw 0xaa55

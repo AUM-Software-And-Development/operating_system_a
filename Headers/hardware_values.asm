@@ -1,0 +1,1 @@
+boot_drive: db 0
