@@ -27,10 +27,10 @@ Call    int_19_attach_sector_2_to_kernel_address       ; Aligns the kernel code 
 	
         .bootFailure:
 	
-        Mov si, string_boot_error
-Call int_16_output_si
-        Cli
-        Hlt
+            Mov si, string_boot_error
+Call        int_16_output_si
+            Cli
+            Hlt
 
 Times 510-($-$$) db 0
 Dw 0xaa55
