@@ -2,7 +2,7 @@ Bits 16
 
     jmp kernel_setup ; Increment the ip to exceed the include code.
 
-string_booted: db "The 16 bit kernel address has been located.", 0xa, 0xd, 255
+string_booted: db "The 16 bit real mode kernel address has been located.", 0xa, 0xd, 255
 string_options_header: db "Use the sequence slash, enter ( / ) ( enter ), to enter 32 bit protected mode.", 255
 
 %Include "headers\addresses.asm"
