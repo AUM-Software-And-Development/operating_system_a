@@ -124,11 +124,16 @@ if "%BACKUP%" == "TRUE" (
 :Prompt_And_End
 
 echo.
-set /P AUTORUN=Press e to run the emulator now, or any other key to exit: 
-if "%AUTORUN%" == "e" (
+set /P AUTORUN=Press ( b ) to run the OS in Bochs, ( q ) for QEMU, or any other key to exit: 
+if "%AUTORUN%" == "b" (
 
 	cd "%PATHTO%"
-	start bochsrc.bxrc
+	bochsrc.bxrc
+
+) else if "%AUTORUN%" == "q" (
+
+	cd "%PATHTO%"
+	qemu-system-i386 -fda booting\operating_system.bin
 
 ) else (
 

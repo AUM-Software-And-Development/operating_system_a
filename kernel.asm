@@ -2,11 +2,16 @@ Bits 16
 
         jmp kernel_setup ; Increment the ip to exceed the include code.
 
-string_booted: db "The 16 bit real mode kernel address has been located.", 0xa, 0xd, 255
-string_options_header: db "Use the sequence slash, enter ( / ) ( enter ), to enter 32 bit protected mode.", 255
+string_booted: db "The 16 bit real mode kernel address has been located.", 0xa, 0xa, 0xd, 255
+string_options_header:
+    db "Use the keys slash, enter ( / ) ( enter ), to enter 32 bit protected mode.", 0xa, 0xd, \
+       "Use the keys b, enter ( b ) ( enter ) to print characters in binary.", 255
 
 %Include "headers\addresses.asm"
 %Include "bios_interrupts\int_16.asm"
+%Include "tools\kernel_input.asm"
+%include "tools\displaying_register_values.asm"
+%Include "global_descriptor_table.asm"
 
 
 
@@ -27,12 +32,9 @@ Call    int_16_output_si
 Call    int_16_output_si
         jmp start_interaction
 
-%Include "tools\kernel_input.asm"
 start_interaction:
 
-        mov si, string_rewritable
 Call    inherit_keystrokes
-        mov si, string_rewritable
 Call    find_request
 
         Cli
@@ -40,7 +42,6 @@ Call    find_request
 
 ; The computer will enter 32 bit mode only if the user requests it.
 
-%Include "global_descriptor_table.asm"
 enable_32_bit_protected_mode:
 
 .enable_a20:

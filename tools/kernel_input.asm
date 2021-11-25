@@ -3,6 +3,7 @@ inherit_keystrokes:
 
         Mov dx, 1
 Call    int_16_add_blank_rows
+        Mov si, string_rewritable
 
         key_loop:
             
@@ -29,9 +30,15 @@ Call            int_16_add_blank_rows
 ; Parameter: (si) - String to read instruction routes from.
 find_request:
 
-        call int_16_output_si
+        Mov si, string_rewritable
+        Call int_16_output_si
+        Mov dx, 1
+Call    int_16_add_blank_rows
 
-        cmp byte [si], '/'
-        je enable_32_bit_protected_mode
+        Cmp byte [si], '/'
+        Je enable_32_bit_protected_mode
 
-        ret
+        Cmp byte [si], 'b'
+        Je put_dx_on_the_display_in_binary
+        
+        Ret
